@@ -1,5 +1,6 @@
-export class UpdateCategory {
-    readonly name: string;
-    readonly image: string;
-    readonly itemsNumber: number;
+import { CreateCategory } from './createCategory.dto';
+import { PartialType } from '@nestjs/mapped-types';
+
+export class UpdateCategory extends PartialType(CreateCategory) {
+
 }

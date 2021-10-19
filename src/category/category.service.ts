@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import {Category} from './category.interface'
+import {Category} from './entities/category.entity'
 import {CreateCategory} from './dto/createCategory.dto'
+import { UpdateCategory } from './dto/updateCategory.dto';
 @Injectable()
 export class CategoryService {
     constructor(@InjectModel('category') private readonly categoryModel:  Model<Category>){}
@@ -19,7 +20,7 @@ export class CategoryService {
     async delete(id: string): Promise<Category> {
         return await this.categoryModel.findByIdAndRemove(id);
        }
-    async update(id: string, category: CreateCategory): Promise<Category> {
+    async update(id: string, category: UpdateCategory): Promise<Category> {
         return await this.categoryModel.findByIdAndUpdate(id, category, { new: true });
        }
 }

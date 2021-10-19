@@ -1,9 +1,9 @@
 import { CategoryService } from './category.service';
-import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseInterceptors } from '@nestjs/common';
 import { CreateCategory } from './dto/createCategory.dto'
 import { UpdateCategory } from './dto/updateCategory.dto'
 
-import { Category } from './category.interface'
+import { Category } from './entities/category.entity'
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from '../utils/file-uploading.utils';
@@ -36,7 +36,7 @@ export class CategoryController {
         console.log(response.filename);
         const createCategoryDto:CreateCategory  = {
             name: name,
-            image: "http://localhost:3000/category/" + response.filename,
+            image: "http://localhost:3000/category/image/" + response.filename,
             itemsNumber:0,
         }
         return this.categoryService.create(createCategoryDto);
